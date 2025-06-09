@@ -1,1 +1,1 @@
-# NextJS_CloneCoding_NaverCafe
+# 네이버카페 클론 코딩
