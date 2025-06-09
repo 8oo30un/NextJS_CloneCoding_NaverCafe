@@ -7,7 +7,7 @@ const BarHeader = () => {
       {" "}
       <div className="max-w-[1512px] mx-[97px] flex items-center justify-between pt-[20px] pb-[20px] pl-4">
         <div className="flex items-center space-x-[101px]">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center space-x-1.5">
             <h2 className="text-[18px] font-extrabold">NAVER</h2>
             <h1 className="text-[24px] font-bold"> 카페</h1>
           </div>
