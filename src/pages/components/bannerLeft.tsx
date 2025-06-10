@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPosts } from "../api/post"; // ✅ 경로 주의
+import { getPosts } from "../api/post";
 import type { Post } from "../api/post";
 
 const BannerLeft = () => {
@@ -11,15 +11,20 @@ const BannerLeft = () => {
 
   useEffect(() => {
     const fetch = async () => {
+      console.log("📡 getPosts() 호출 시작");
+
       const result = await getPosts();
 
       if (result === null) {
+        console.warn("⚠️ 게시글 데이터를 불러오지 못했습니다.");
         setFetchFailed(true);
       } else {
+        console.log("✅ 게시글 데이터 수신:", result);
         setPosts(result);
       }
 
       setLoading(false);
+      console.log("✅ 로딩 완료");
     };
 
     fetch();
