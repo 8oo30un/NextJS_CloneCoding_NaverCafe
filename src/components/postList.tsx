@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Post } from "../api/post";
+import { Post } from "@/pages/api/post";
 
 interface PostListProps {
   posts: Post[];
