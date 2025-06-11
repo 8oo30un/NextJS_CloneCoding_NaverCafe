@@ -1,9 +1,9 @@
 // pages/_app.tsx
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
-import BarHeader from "@/pages/components/barHeader";
+import BarHeader from "@/components/barHeader";
 import "@/styles/globals.css";
-import BarSide from "@/pages/components/barSide";
+import BarSide from "@/components/barSide";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();

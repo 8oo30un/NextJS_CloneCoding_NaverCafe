@@ -2,8 +2,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getPosts, deletePost, createPost, updatePost } from "../api/post";
-import type { Post } from "../api/post";
+import { getPosts, deletePost, createPost, updatePost } from "@/pages/api/post";
+import type { Post } from "@/pages/api/post";
 import Modal from "../components/modal";
 import { useRouter } from "next/router";
 import PopularPosts from "./popularPosts";

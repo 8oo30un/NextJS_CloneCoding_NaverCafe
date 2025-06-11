@@ -1,5 +1,5 @@
-import BannerRight from "./components/bannerRight";
-import BannerLeft from "./components/bannerLeft";
+import BannerRight from "@/components/bannerRight";
+import BannerLeft from "@/components/bannerLeft";
 
 export default function CafeHomePage() {
   return (
