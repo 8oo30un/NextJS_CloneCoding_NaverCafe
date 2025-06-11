@@ -1,18 +1,29 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router"; // Pages Router용 (Next.js 12/기존 방식)
 
 const BarSide = () => {
   const menuItems = ["카페 홈", "이웃", "구독", "인기글", "내 소식", "채팅"];
   const [selected, setSelected] = useState("카페 홈");
 
+  const router = useRouter(); // ✅ 라우터 사용
+
+  const handleMenuClick = (item: string) => {
+    setSelected(item);
+    if (item === "카페 홈") {
+      router.push("/CafeHomePage"); // ✅ 이동
+    }
+    // 나중에 다른 메뉴도 경로 설정할 수 있음
+  };
+
   return (
     <div className="fixed top-[77px] left-0 h-[calc(100vh-77px)] w-[313px] border-r border-r-gray-300 bg-white">
       <div className="h-full ml-[113px] ">
         <div className="flex w-[142px] h-[306px]border-b border-b-gray-300">
-          <div className="flex flex-col h-full w-[150px] pr-[12px] pt-[33px]  pb-[33px] space-y-[26px] border-b border-b-gray-300">
+          <div className="flex flex-col h-full w-[150px] pr-[12px] pt-[38px]  pb-[33px] space-y-[26px] border-b border-b-gray-300">
             {menuItems.map((item) => (
               <div
                 key={item}
-                onClick={() => setSelected(item)}
+                onClick={() => handleMenuClick(item)}
                 className={`w-[150px] h-[29px] flex items-center px-2 rounded-[4px] cursor-pointer flex-shrink-0
             ${
               selected === item

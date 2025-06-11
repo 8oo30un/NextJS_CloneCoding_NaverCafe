@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       {!shouldHideHeader && <BarHeader />}
       {!shouldHideHeader && <BarSide />}
+
       <Component {...pageProps} />
     </>
   );
