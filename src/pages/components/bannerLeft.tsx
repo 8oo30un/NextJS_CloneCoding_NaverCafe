@@ -13,6 +13,24 @@ const BannerLeft = () => {
   const [loading, setLoading] = useState(true);
   const [fetchFailed, setFetchFailed] = useState(false);
 
+  const [currentHourText, setCurrentHourText] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat("ko-KR", {
+        hour: "numeric",
+        hour12: true,
+      });
+      const formatted = formatter.format(now);
+      setCurrentHourText(`${formatted} 기준`);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 60 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   //modal function
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"create" | "edit">("create");
@@ -104,21 +122,17 @@ const BannerLeft = () => {
     <div className="flex flex-col w-[90%]  mx-auto  mt-[38px] border h-screen ">
       <h2 className="mb-4 flex font-[15px] font-bold">카페 홈</h2>
 
-      <div>
-        <button
-          onClick={() => {
-            setModalMode("create");
-            setFormData({ title: "", author: "", category: "", content: "" });
-            setIsModalOpen(true);
-          }}
-          className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          추가하기
-        </button>
-      </div>
+      <div className="flex flex-col justify-between h-[30%]">
+        <div className="flex items-end justify-between w-full px-2 py-1 ">
+          <div className="flex items-end gap-2">
+            <h2 className="font-bold text-[15px]">🔥 나의 인기글</h2>
+            <span className="text-[11px] text-gray-500">{currentHourText}</span>
+          </div>
+          <div className="text-[12px] font-bold cursor-pointer hover:underline">
+            더보기 ▶︎
+          </div>
+        </div>
 
-      <div className="flex flex-col  justify-between h-[30%] border border-amber-400">
-        <h2 className="h-[10%] font-bold font-[12px] ">🔥 나의 인기글</h2>
         <PopularPosts posts={posts} />
       </div>
 
@@ -161,6 +175,19 @@ const BannerLeft = () => {
           </li>
         ))}
       </ul>
+
+      <div>
+        <button
+          onClick={() => {
+            setModalMode("create");
+            setFormData({ title: "", author: "", category: "", content: "" });
+            setIsModalOpen(true);
+          }}
+          className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+        >
+          추가하기
+        </button>
+      </div>
 
       <Modal visible={isModalOpen} onClose={closeModal}>
         <h3 className="text-lg font-bold mb-4">

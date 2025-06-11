@@ -29,7 +29,7 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
               className="w-20 h-20 object-cover rounded"
             />
           ) : (
-            <div className="w-full h-[80%] bg-gray-300 rounded mb-[8px]" />
+            <div className="w-full h-[100%] bg-gray-300 rounded mb-[8px]" />
           )}
           <div className="flex flex-col justify-between">
             <h3 className="font-bold text-sm line-clamp-2">{post.title}</h3>
