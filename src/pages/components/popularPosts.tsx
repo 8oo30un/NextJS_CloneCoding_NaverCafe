@@ -19,9 +19,9 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
   const displayPosts = posts.slice(0, 3);
 
   return (
-    <div className="flex gap-3 h-full overflow-x-auto mt-[24px] ">
+    <div className="flex gap-3 h-[170px] overflow-x-auto mt-[24px] ">
       {displayPosts.map((post) => (
-        <div key={post.id} className=" w-full  h-[80%]  rounded gap-3 ">
+        <div key={post.id} className=" w-full  h-[100%]  rounded gap-3 ">
           {post.imageUrl ? (
             <img
               src={post.imageUrl}
@@ -29,11 +29,13 @@ const PopularPosts: React.FC<PopularPostsProps> = ({ posts }) => {
               className="w-20 h-20 object-cover rounded"
             />
           ) : (
-            <div className="w-full h-[100%] bg-gray-300 rounded mb-[8px]" />
+            <div className="w-[100%] h-[70%] bg-gray-300 rounded mb-[8px]" />
           )}
           <div className="flex flex-col justify-between">
             <h3 className="font-bold text-sm line-clamp-2">{post.title}</h3>
-            <p className="text-xs text-gray-600 line-clamp-3">{post.content}</p>
+            <p className="text-xs text-gray-600 truncate max-w-[30ch]">
+              {post.content}
+            </p>
           </div>
         </div>
       ))}

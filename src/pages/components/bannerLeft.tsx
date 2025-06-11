@@ -7,6 +7,7 @@ import type { Post } from "../api/post";
 import Modal from "../components/modal";
 import { useRouter } from "next/router";
 import PopularPosts from "./popularPosts";
+import PostList from "./postList";
 
 const BannerLeft = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -119,75 +120,59 @@ const BannerLeft = () => {
       <div className="w-full h-screen flex items-center justify-items-center bg-gray-50"></div>
     );
   return (
-    <div className="flex flex-col w-[90%]  mx-auto  mt-[38px] border h-screen ">
-      <h2 className="mb-4 flex font-[15px] font-bold">카페 홈</h2>
-
-      <div className="flex flex-col justify-between h-[30%]">
-        <div className="flex items-end justify-between w-full px-2 py-1 ">
-          <div className="flex items-end gap-2">
-            <h2 className="font-bold text-[15px]">🔥 나의 인기글</h2>
-            <span className="text-[11px] text-gray-500">{currentHourText}</span>
-          </div>
-          <div className="text-[12px] font-bold cursor-pointer hover:underline">
-            더보기 ▶︎
+    <div className="flex flex-col w-[90%]  mx-auto  mt-[38px] h-[280px]  ">
+      <div className="h-[30%]">
+        <h2 className="mb-4 flex font-[15px] font-bold">카페 홈</h2>
+        <div className="flex flex-col justify-between h-[40%] ">
+          <div className="flex items-end justify-between w-full  py-1 ">
+            <div className="flex items-end gap-2">
+              <h2 className="font-bold text-[15px]">🔥 나의 인기글</h2>
+              <span className="text-[11px] text-gray-500">
+                {currentHourText}
+              </span>
+            </div>
+            <div className="text-[12px] font-bold cursor-pointer hover:underline">
+              더보기 ▶︎
+            </div>
           </div>
         </div>
 
-        <PopularPosts posts={posts} />
+        <div className="h-[70%]">
+          <PopularPosts posts={posts} />
+        </div>
       </div>
 
-      <ul className="space-y-2">
-        {posts.map((post) => (
-          <li
-            key={post.id}
-            className="flex justify-between items-center border p-2 rounded"
-          >
-            <span
-              onClick={() => router.push(`/posts/${post.id}`)}
-              className="cursor-pointer hover:underline"
-            >
-              {post.title} - {post.author}
-            </span>
-            <div className="space-x-2">
-              <button
-                onClick={() => {
-                  setModalMode("edit");
-                  setSelectedPost(post);
-                  setFormData({
-                    title: post.title,
-                    author: post.author,
-                    category: post.category,
-                    content: post.content || "",
-                  });
-                  setIsModalOpen(true);
-                }}
-                className="px-2 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
-              >
-                수정
-              </button>
-              <button
-                onClick={() => handleDelete(post.id)}
-                className="px-2 py-1 text-sm bg-red-500 text-white rounded hover:bg-red-600"
-              >
-                삭제
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      <div>
+      <div className=" flex items-center justify-between mt-[215px] w-[27%]">
+        <div className="flex items-center justify-center w-[93px] h-[35px] bg-[#EBF8EC] text-[#469D51] rounded-[6px] text-[16px] font-bold">
+          <span>내 게시글</span>
+        </div>
         <button
           onClick={() => {
             setModalMode("create");
             setFormData({ title: "", author: "", category: "", content: "" });
             setIsModalOpen(true);
           }}
-          className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+          className=" w-[93px] h-[35px] border border-[#F0F0F0] text-[#676767] rounded hover:bg-[#EBF8EC] rounded-[6px] text-[16px] font-bold"
         >
-          추가하기
+          작성하기
         </button>
       </div>
+
+      <PostList
+        posts={posts}
+        onEdit={(post) => {
+          setModalMode("edit");
+          setSelectedPost(post);
+          setFormData({
+            title: post.title,
+            author: post.author,
+            category: post.category,
+            content: post.content || "",
+          });
+          setIsModalOpen(true);
+        }}
+        onDelete={handleDelete}
+      />
 
       <Modal visible={isModalOpen} onClose={closeModal}>
         <h3 className="text-lg font-bold mb-4">
