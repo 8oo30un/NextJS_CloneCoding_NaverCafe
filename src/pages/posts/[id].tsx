@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import BannerRight from "../components/bannerRight";
+import BannerRight from "@/components/bannerRight";
 import { Post } from "../api/post";
 const PostDetail = () => {
   const router = useRouter();
